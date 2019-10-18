@@ -16,11 +16,9 @@ const Login = (props) => {
 
   const onLogin = (e) => {
     e.preventDefault()
-    debugger
     axios.post('http://localhost:5000/api/login', loginForm)
       .then(res => {
         console.log(res)
-        debugger
         localStorage.setItem('token', res.data.payload)
         props.history.push('/colors')
       })
