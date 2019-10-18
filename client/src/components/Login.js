@@ -6,7 +6,7 @@ const initialLoginForm = {
   password: '',
 };
 
-const Login = () => {
+const Login = (props) => {
   // make a post request to retrieve a token from the api
   const [loginForm, setLoginForm] = useState(initialLoginForm);
 
@@ -22,7 +22,7 @@ const Login = () => {
         console.log(res)
         debugger
         localStorage.setItem('token', res.data.payload)
-        //props.history.push('/friends')
+        props.history.push('/colors')
       })
       .catch(err => {
         alert(err.message)
@@ -34,7 +34,6 @@ const Login = () => {
   return (
     <>
       <h1>Welcome to the Bubble App!</h1>
-      <p>Build a login page here</p>
       {/* <button className='logout' onClick={onLogout} >Log Out</button> */}
       <form onSubmit={onLogin}>
         <div>
