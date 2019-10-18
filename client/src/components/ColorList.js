@@ -23,25 +23,32 @@ const ColorList = ({ colors, updateColors }) => {
     // think about where will you get the id from...
     // where is is saved right now?
     withAuth().put('http://localhost:5000/api/colors/:id', colorToEdit)
-    .then(res => {
-      console.log(res)
-      debugger
-      let editedColors = colors.map(color => (color.id === res.data.id)?
-                                    color = colorToEdit:
-                                    color = color)
-                                    console.log(editedColors)
-      updateColors(editedColors)
-      debugger
-    })
-    .catch(err => {
-      debugger
-    })
-    console.log(colors)
-    debugger
+      .then(res => {
+        console.log(res)
+        let editedColors = colors.map(color => (color.id === res.data.id) ?
+                                                  color = colorToEdit :
+                                                  color = color)
+        console.log(editedColors)
+        updateColors(editedColors)
+      })
+      .catch(err => {
+        debugger
+      })
   };
 
   const deleteColor = color => {
+    debugger
     // make a delete request to delete this color
+    withAuth().delete(`http://localhost:5000/api/colors/${color.id}`)
+      .then(res => {
+        console.log(res)
+        debugger
+        let deleteColors = colors.filter(color => color.id !== res.data)
+        updateColors(deleteColors)
+      })
+      .catch(err => {
+        debugger
+      })
   };
 
   return (
